@@ -12,7 +12,7 @@ Este guia explica como configurar e acessar a aplicação Python usando Kubernet
 
 1. Inicie o Minikube:
 ```bash
-minikube start
+minikube start --driver=docker
 ```
 
 2. Habilite o addon do Ingress:
