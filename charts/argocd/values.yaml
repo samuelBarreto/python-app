@@ -1,0 +1,33 @@
+redis-ha:
+  enabled: false
+
+controller:
+  replicas: 1
+
+server:
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+
+repoServer:
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+
+applicationSet:
+  replicas: 1
+
+global:
+  domain: argocd.test.com
+
+certificate:
+  enabled: true
+
+server:
+  ingress:
+    annotations:
+      # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    enabled: true
+    ingressClassName: nginx
+    tls: true
