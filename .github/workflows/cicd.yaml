@@ -49,11 +49,21 @@ jobs:
 
       - uses: actions/checkout@v3
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          pip install yq
+
       - name: Modify values file
         shell: bash
         run: |
           echo ${{needs.ci.outputs.commit_id}}
-          pip install yq
           yq -Yi '.image.tag = "${{needs.ci.outputs.commit_id}}"' charts/python-app/values.yaml
 
       - name: Commit changes
