@@ -33,7 +33,7 @@ jobs:
           push: true
           context: .
           tags: 1234samue/python-app:${{ env.COMMIT_ID }}
-          provenance: false
+          provenance: true
     outputs:
       commit_id: ${{ env.COMMIT_ID }}
 
