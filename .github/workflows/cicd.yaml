@@ -32,7 +32,7 @@ jobs:
         with:
           push: true
           context: .
-          tags: docker.io/samuelbarreto/python-app:${{ env.COMMIT_ID }}
+          tags: docker.io/1234samue/python-app:${{ env.COMMIT_ID }}
           provenance: false
     outputs:
       commit_id: ${{ env.COMMIT_ID }}
