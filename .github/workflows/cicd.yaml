@@ -66,10 +66,17 @@ jobs:
           echo ${{needs.ci.outputs.commit_id}}
           yq -Yi '.image.tag = "${{needs.ci.outputs.commit_id}}"' charts/python-app/values.yaml
 
-      - name: Commit changes
-        uses: EndBug/add-and-commit@v9
-        with:
-          message: 'Updates values.yaml with commit ${{needs.ci.outputs.commit_id}}'
+      - name: Configure Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+      - name: Commit and push changes
+        run: |
+          git add charts/python-app/values.yaml
+          git commit -m "Updates values.yaml with commit ${{needs.ci.outputs.commit_id}}"
+          git push "https://${{ secrets.GH_TOKEN }}@github.com/samuelBarreto/python-app.git" HEAD:main
+          token: ${{ secrets.GH_TOKEN }}
 
       - name: Install argocd
         shell: bash
