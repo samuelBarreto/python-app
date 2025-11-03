@@ -20,6 +20,7 @@ jobs:
         shell: bash
         run: |
           echo "COMMIT_ID=${GITHUB_SHA::6}" >> "$GITHUB_ENV"
+          
       - name: Docker Hub Login Debug
         run: |
           echo "Checking Docker Hub connectivity..."
