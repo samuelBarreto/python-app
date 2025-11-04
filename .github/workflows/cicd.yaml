@@ -78,12 +78,12 @@ jobs:
       #     git push "https://${{ secrets.GH_TOKEN }}@github.com/samuelBarreto/python-app.git" HEAD:main
       #     token: ${{ secrets.GH_TOKEN }}
 
-      # - name: Install argocd
-      #   shell: bash
-      #   run: |
-      #     curl -ksSL -o argocd https://argocd-server.argocd/download/argocd-linux-amd64
-      #     chmod +x argocd
-      #     sudo mv ./argocd /usr/local/bin/argocd
+      - name: Install argocd
+        shell: bash
+        run: |
+          curl -ksSL -o argocd https://argocd-server.argocd/download/argocd-linux-amd64
+          chmod +x argocd
+          sudo mv ./argocd /usr/local/bin/argocd
 
       - name: Argocd app sync
         shell: bash
