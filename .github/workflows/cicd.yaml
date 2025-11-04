@@ -49,34 +49,27 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      # - name: Set up Python
-      #   uses: actions/setup-python@v4
-      #   with:
-      #     python-version: '3.x'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-      # - name: Install dependencies
-      #   shell: bash
-      #   run: |
-      #     python -m pip install --upgrade pip
-      #     pip install yq
+      - name: Install dependencies
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          pip install yq
 
-      # - name: Modify values file
-      #   shell: bash
-      #   run: |
-      #     echo ${{needs.ci.outputs.commit_id}}
-      #     yq -Yi '.image.tag = "${{needs.ci.outputs.commit_id}}"' charts/python-app/values.yaml
+      - name: Modify values file
+        shell: bash
+        run: |
+          echo ${{needs.ci.outputs.commit_id}}
+          yq -Yi '.image.tag = "${{needs.ci.outputs.commit_id}}"' charts/python-app/values.yaml
 
-      # - name: Configure Git
-      #   run: |
-      #     git config --global user.name 'github-actions[bot]'
-      #     git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          
-      # - name: Commit and push changes
-      #   run: |
-      #     git add charts/python-app/values.yaml
-      #     git commit -m "Updates values.yaml with commit ${{needs.ci.outputs.commit_id}}"
-      #     git push "https://${{ secrets.GH_TOKEN }}@github.com/samuelBarreto/python-app.git" HEAD:main
-      #     token: ${{ secrets.GH_TOKEN }}
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'Updates values.yaml with commit ${{needs.ci.outputs.commit_id}}'
 
       - name: Install argocd
         shell: bash
