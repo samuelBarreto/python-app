@@ -146,7 +146,7 @@ kubectl logs -n actions-runner-system \
 ```bash
 kubectl get events -n actions-runner-system
 ```
-
+```bash
 kubectl apply  -n actions-runner-system -f runnerdeployment.yaml
 runnerdeployment.actions.summerwind.dev/self-hosted-runners created
 
@@ -156,8 +156,21 @@ NAME                                        READY   STATUS              RESTARTS
 actions-runner-controller-6f4c8db58-mx5zv   2/2     Running             0          5m56s
 self-hosted-runners-g9k5x-sxcxp             0/2     ContainerCreating   0          29s
 
+kubectl exec -ti self-hosted-runners-rfpzx-nltkc s -n actions-runner-system -- sh 
+Error from server (NotFound): pods "self-hosted-runners-rfpzx-nltkc" not found
 
+Samuel@SAMUEL MINGW64 ~/Desktop/backstage
+$ kubectl get pods -n actions-runner-system
+NAME                                        READY   STATUS    RESTARTS      AGE
+actions-runner-controller-6f4c8db58-5hmzf   2/2     Running   8 (93s ago)   18h
+self-hosted-runners-rfpzx-ck8jk             2/2     Running   0             2m3s
 
+Samuel@SAMUEL MINGW64 ~/Desktop/backstage
+$ kubectl exec -ti self-hosted-runners-rfpzx-ck8jk s -n actions-runner-system -- sh
+Defaulted container "runner" out of: runner, docker
+$ curl -k - https://argocd-server.argocd/
+```
+  
 ## Limpeza
 
 Para remover o Actions Runner Controller:

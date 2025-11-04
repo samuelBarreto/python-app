@@ -13,8 +13,10 @@ Este guia detalha a instalação e configuração do Argo CD usando Helm no Kube
 
 1. Adicione o repositório Helm do Argo CD:
 ```bash
-helm repo add argo https://argoproj.github.io/argo-helm
-helm repo update
+
+helm repo add argo https://argoproj.github.io/argo-helm; helm repo update
+
+
 ```
 
 2. Certifique-se que o Ingress está habilitado no Minikube:
